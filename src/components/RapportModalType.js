@@ -306,9 +306,9 @@ const RapportModalType = () => {
         data: {}
     })
 
-    //const printer = useQuery('Printer')?.filtered('pointOfSale._id == $0 && enbaled == true', new Realm.BSON.ObjectID(currentRestaurant))
+    //const printer = useSQLQuery('Printer')?.filtered('pointOfSale._id == $0 && enbaled == true', currentRestaurant)
 
-    const cashBox = boxInformation?.filter((e) => e?.pointOfSale._id == new Realm.BSON.ObjectID(pointOfSale?._id))//?.sorted('dateOfZ', true)
+    const cashBox = boxInformation?.filter((e) => e?.pointOfSale._id == pointOfSale?._id)//?.sorted('dateOfZ', true)
 
 
 

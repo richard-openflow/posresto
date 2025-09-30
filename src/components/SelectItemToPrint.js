@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { CommandController } from '../utils/realmDB/service/commandService';
 import moment from 'moment';
 import { transferProductToOrder } from '../redux/actions/orderActions';
-import { BSON } from 'realm';
+import { generateId } from "../../../utils/sqliteDB"
 let timer = null
 const SelectItemToPrint = ({ setShowTransfer, showTransfer = false, indexes, setIndexes, printer, orders, orderNumber, showPrinter, setShowPrinter, pointOfSale, user, Zone, table, Command, dispatch, selectOrder = orders?.find((e) => e?.orderNumber == orderNumber), }) => {
 
@@ -388,7 +388,7 @@ const SelectItemToPrint = ({ setShowTransfer, showTransfer = false, indexes, set
                                         pointOfSale,
                                         user: activeStuff,
                                         zone: { ...cmd?.zone },
-                                        _id: new BSON.ObjectId(),
+                                        _id: generateId(),
 
                                         origin: 'pos',
                                         commandProduct: [],

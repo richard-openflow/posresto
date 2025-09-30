@@ -1,6 +1,6 @@
 import { API } from "@utils"
 import { all, call, delay, fork, put, takeEvery } from 'redux-saga/effects'
-import { menuController } from '../../utils/realmDB/service/MenuService'
+import { menuController } from '../../utils/sqliteDB'
 import { getMenuFailed, getMenuSuccess } from '../actions/menuAction'
 import { GETMENU } from '../constants/menuActionType'
 

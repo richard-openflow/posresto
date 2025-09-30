@@ -9,11 +9,10 @@ import { PaperProvider } from 'react-native-paper'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import Routing from './src/route'
-import { RealmProvider } from './src/utils/realmDB/store'
 import { LogBox, StatusBar, View } from 'react-native'
 import { MMKV } from 'react-native-mmkv'
 import { persistor } from './src/redux'
-import { CommandController } from './src/utils/realmDB/service/commandService'
+import { CommandController, initDatabase } from './src/utils/sqliteDB'
 
 // // Ignore log notification by message
 LogBox.ignoreLogs(['Warning: ...']);
@@ -22,11 +21,25 @@ LogBox.ignoreAllLogs();
 
 const App = () => {
 
-
-
+  const [dbInitialized, setDbInitialized] = useState(false);
   const storage = new MMKV()
 
   useEffect(() => {
+    const initDB = async () => {
+      try {
+        await initDatabase();
+        setDbInitialized(true);
+        console.log('SQLite database initialized successfully');
+      } catch (error) {
+        console.error('Failed to initialize database:', error);
+      }
+    };
+    initDB();
+  }, []);
+
+  useEffect(() => {
+    if (!dbInitialized) return;
+
     BackgroundFetch.configure(
       {
         enableHeadless: true,
@@ -38,15 +51,11 @@ const App = () => {
       () => {
         const { order } = JSON.parse(storage.getString("persist:root"))
         const { orders } = JSON.parse(order)
-        // for (const or of orders) {
-
-        //   if (or?.commandProduct?.length > 0)
         CommandController.create([...orders])
-        // }
       },
       () => { })
 
-  }, [store])
+  }, [store, dbInitialized])
 
   useEffect(() => {
 
@@ -66,16 +75,21 @@ const App = () => {
 
 
 
+  if (!dbInitialized) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      </View>
+    );
+  }
+
   return (
     <PaperProvider>
       <StatusBar hidden />
-      <RealmProvider>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <Routing />
-          </PersistGate>
-        </Provider>
-      </RealmProvider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Routing />
+        </PersistGate>
+      </Provider>
     </PaperProvider>
 
 

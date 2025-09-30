@@ -12,7 +12,7 @@ import { createClient, createTCPServer } from '../TCP/services';
 import { getUdpSocket, SendMessage, SendMessageToIpAdresse } from '../Udp/services';
 import { ENDOFFILE } from '../config';
 import { CommandController } from '../realmDB/service/commandService';
-import { realmConfig, useQuery } from '../realmDB/store';
+import { realmConfig, useSQLQuery } from '../realmDB/store';
 import { getSocket } from '../socket';
 import { createAnswer, createPeer, sendDATA, setAnswer } from '../webRTC/service';
 
@@ -331,7 +331,7 @@ const options = {
     },
 };
 const TCPBackground = () => {
-    const pp = useQuery('PointOfSale')
+    const pp = useSQLQuery('PointOfSale')
     useEffect(() => {
 
         if (BackgroundService?.isRunning()) {

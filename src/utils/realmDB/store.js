@@ -52,9 +52,9 @@ const realmConfig = {
 
 };
 
-const { RealmProvider, useRealm, useObject, useQuery } = createRealmContext(realmConfig);
+const { RealmProvider, getDatabase } = createRealmContext(realmConfig);
 
 
 export {
-    RealmProvider, useRealm, useObject, useQuery, realmConfig
+    RealmProvider, getDatabase, realmConfig
 }

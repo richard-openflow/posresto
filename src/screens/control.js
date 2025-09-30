@@ -26,7 +26,7 @@ import moment from 'moment';
 import { useForm } from 'react-hook-form';
 import Foundation from 'react-native-vector-icons/Foundation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { BSON } from 'realm';
+import { generateId } from "../../../utils/sqliteDB"
 import { ModalOptionSelector } from '../components/modalOptionSelector';
 import { MultipleProductModal } from '../components/MultipleProductModal';
 import { QuickViewModal } from '../components/QuickViewModal';
@@ -221,7 +221,7 @@ const ControlScreen = ({ route }) => {
       if (selectedProduct?.product.option.length == 0) {
 
         let a = []
-        a.push({ product: selectedProduct?.product, clickCount: data, sent: 0, _id: new Realm.BSON.ObjectID() })
+        a.push({ product: selectedProduct?.product, clickCount: data, sent: 0, _id: generateId() })
         setValue('selectedProductsList', [...getValues().selectedProductsList, ...a]);
       } else {
         alert('This product has options')
@@ -316,7 +316,7 @@ const ControlScreen = ({ route }) => {
                   numberPeople: 1,
                   pointOfSale,
                   user: activeStuff,
-                  _id: new BSON.ObjectId()
+                  _id: generateId()
                 })
                 dispatch(createOrder({ order: a, currentRestaurant: pointOfSale?._id }))
 
@@ -355,7 +355,7 @@ const ControlScreen = ({ route }) => {
                   pointOfSale,
                   user: activeStuff,
                   nextInKitchen: 0,
-                  _id: new BSON.ObjectId()
+                  _id: generateId()
                 })
                 dispatch(createOrder({ order: a, currentRestaurant: pointOfSale?._id }))
                 setOrderNumber(a?.orderNumber)

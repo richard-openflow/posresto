@@ -8,7 +8,7 @@ import { getSocket } from '../../utils/socket';
 import { getCommandFailed, getCommandSuccess } from '../actions/CommandeActions';
 import { GETCOMMAND } from '../constants/CommandeActionTypes';
 import { BOOKING_ORDER_CREATION, CLEAR_ORDERS, CREATE_COMMAND, DELETE_ORDER, GET_ALL_BOOKING_OF_DAY, GET_BOOKING_INFORMATION_TO_ORDER, PAY_ORDER, RE_SEND_ALL_TO_KITCHEN, SEND_ALL_TO_KITCHEN, TRANSFER_ORDERS, TRANSFER_PRODUCT_TO_ORDER } from '../constants/orderActionsTypes';
-import { CommandController } from '../../utils/realmDB/service/commandService';
+import { CommandController } from '../../utils/sqliteDB';
 import { getOrderObject } from '../../utils/helpers';
 import { bookingOrderCreation, createOrder, getBookingInformationToOrderFailed, getBookingInformationToOrderSuccess, updateUnitOrder } from '../actions/orderActions';
 import { showModalActionTableMap } from '../actions/ModalReducer';

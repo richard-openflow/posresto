@@ -8,7 +8,7 @@ import { hideModalActionTableMap } from '../redux/actions/ModalReducer'
 import moment from 'moment'
 import { Snackbar } from 'react-native-paper'
 import { createOrder, getBookingInformationToOrder } from '../redux/actions/orderActions'
-import { BSON } from 'realm'
+import { generateId } from "../../../utils/sqliteDB"
 import { getOrderObject } from '../utils/helpers'
 
 const ModalAskTableCommand = ({ isLinked }) => {
@@ -88,7 +88,7 @@ const ModalAskTableCommand = ({ isLinked }) => {
                                     user: activeStuff,
                                     nextInKitchen: 0,
                                     unit,
-                                    _id: new BSON.ObjectId()
+                                    _id: generateId()
                                 })
                                 dispatch(createOrder({
                                     order: {

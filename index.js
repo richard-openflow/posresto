@@ -9,7 +9,7 @@ import { name as appName } from './app.json';
 import BackgroundFetch from "react-native-background-fetch";
 import { MMKV } from 'react-native-mmkv';
 import tinyEmitter from 'tiny-emitter/instance';
-import { CommandController } from './src/utils/realmDB/service/commandService';
+import { CommandController } from './src/utils/sqliteDB';
 
 let savingHeadless = async (event) => {
     console.log('HEADKEKEK')

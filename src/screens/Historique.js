@@ -11,7 +11,7 @@ const { height } = Dimensions.get('screen')
 const Historique = ({ onPress, navigation }) => {
   const { currentRestaurant: a } = useSelector(state => state.user)
   // const currentRestaurant = new Realm.BSON.ObjectId(a)
-  // const data = JSON.parse(JSON.stringify(useQuery('Orders').filtered('pointOfSale._id == $0 && Z == null', new Realm.BSON.ObjectID(currentRestaurant)) || []))
+  // const data = JSON.parse(JSON.stringify(useSQLQuery('Orders').filtered('pointOfSale._id == $0 && Z == null', currentRestaurant) || []))
   const { orders, uniqueId } = useSelector(state => state.order)
   const [showDelete, setShowDelete] = useState(false)
   const [showDialogDelete, setShowDialogDelete] = useState({

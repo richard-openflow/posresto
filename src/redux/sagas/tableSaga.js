@@ -1,7 +1,7 @@
 import { API } from "@utils"
 import { all, call, fork, put, takeEvery } from 'redux-saga/effects'
-import { UnitController } from '../../utils/realmDB/service/UnitService'
-import { ZoneController } from '../../utils/realmDB/service/ZoneService'
+import { UnitController } from '../../utils/sqliteDB/services/UnitService'
+import { ZoneController } from '../../utils/sqliteDB/services/ZoneService'
 import { gettableFailed, getTableSuccess } from '../actions/tableAction'
 import { getZoneSuccess } from '../actions/zoneAction'
 import { GETTABLE } from '../constants/tableActionType'

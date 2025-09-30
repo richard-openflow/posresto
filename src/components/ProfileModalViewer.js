@@ -9,7 +9,7 @@ import { getMenu } from '../redux/actions/menuAction';
 import { getEmployeeStuff } from '../redux/actions/StuffEmployeeAction';
 import { getTable } from '../redux/actions/tableAction';
 import { confirmaccess } from '../redux/actions/userActions';
-import { useQuery } from '../utils/realmDB/store';
+import { useSQLQuery } from '../../utils/sqliteDB';
 import { SendMessage } from '../utils/Udp/services';
 import FastImage from 'react-native-fast-image';
 
@@ -47,8 +47,8 @@ const ModalProfileViewer = ({ onClose, children }) => {
         // outputRange: [-width, -width + 300], // Start from 100% (right) to 0% (center)
         outputRange: [-width, 0], // Start from 100% (right) to 0% (center)
     });
-    const pp = useQuery('PointOfSale')
-    const user = useQuery('User').filtered('connectedUser == true')[0]
+    const pp = useSQLQuery('PointOfSale')
+    const user = useSQLQuery('User').filtered('connectedUser == true')[0]
 
     return (
         <Modal transparent statusBarTranslucent={true} visible={vis} animationType="none">

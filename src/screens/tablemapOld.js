@@ -36,7 +36,7 @@ import {
 import { updateOrder } from '../redux/actions/orderActions';
 import { Unit } from '../utils/realmDB/modals/Unit';
 import { CommandController } from '../utils/realmDB/service/commandService';
-import { realmConfig, useObject } from '../utils/realmDB/store';
+import { realmConfig, useSQLObject } from '../../utils/sqliteDB';
 
 const TableMapOld = () => {
     const dispatch = useDispatch();
@@ -56,14 +56,14 @@ const TableMapOld = () => {
     const { table } = useSelector(state => state.table)
     const { orders } = useSelector(state => state.order)
 
-    // const zone = useQuery('Zone')?.filtered(
+    // const zone = useSQLQuery('Zone')?.filtered(
     //     'pointOfSale._id == $0',
-    //     new Realm.BSON.ObjectID(currentRestaurant),
+    //     currentRestaurant,
     // );
-    // const table = useQuery('Unit')
+    // const table = useSQLQuery('Unit')
     //     ?.filtered(
     //         'pointOfSale._id == $0',
-    //         new Realm.BSON.ObjectID(currentRestaurant),
+    //         currentRestaurant,
     //     )
     //     ?.toJSON(); 
     const [selectedZone, setselectedZone] = useState(
@@ -273,7 +273,7 @@ const TableMapOld = () => {
     };
 
     const TableView = ({ table }) => {
-        const myTable = useObject(Unit, table?._id);
+        const myTable = useSQLObject(Unit, table?._id);
 
 
         const changeTable = async (realm, bounds) => {

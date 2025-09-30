@@ -26,7 +26,7 @@ const RenderItem = ({ role, ownership, paid, item, onPress, onLongPress, onDoubl
         }
         const unid = uuid.v4()
 
-        setValue('selectedProductsList', [...getValues().selectedProductsList, { product: { ...item, unid: item?.isFormula ? unid : null }, clickCount: 1, sent: 0, _id: new Realm.BSON.ObjectID() }])
+        setValue('selectedProductsList', [...getValues().selectedProductsList, { product: { ...item, unid: item?.isFormula ? unid : null }, clickCount: 1, sent: 0, _id: generateId() }])
         onPress(unid);
       }}
       doubleTap={() => {

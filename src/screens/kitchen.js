@@ -1,6 +1,6 @@
 import React from 'react'
 import { Dimensions, ScrollView, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
-// import { useQuery } from '../utils/realmDB/store'
+// import { useSQLQuery } from '../../utils/sqliteDB'
 import moment from 'moment'
 import Fontisto from 'react-native-vector-icons/Fontisto'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'

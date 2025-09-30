@@ -12,7 +12,7 @@ UnitController.create = async (data, pointOfSale) => {
     try {
         let unit = data
 
-        unit._id = new Realm.BSON.ObjectID(unit?._id)
+        unit._id = unit?._id
         const realm = await Realm.open(realmConfig);
         return realm.write(() => {
             unit.pointOfSale = realm.objects('PointOfSale').filtered('_id == $0', pointOfSale)[0]
@@ -33,7 +33,7 @@ UnitController.updatePosition = async (data, pointOfSale) => {
     try {
         let unit = data
 
-        unit._id = new Realm.BSON.ObjectID(unit?._id)
+        unit._id = unit?._id
         const realm = await Realm.open(realmConfig);
         return realm.write(() => {
             unit.pointOfSale = realm.objects('PointOfSale').filtered('_id == $0', pointOfSale)[0]
@@ -56,7 +56,7 @@ UnitController.clear = async (pointOfSale) => {
         return realm.write(() => {
             let tables = realm
                 .objects('Unit')
-                .filtered('pointOfSale._id == $0', new Realm.BSON.ObjectID(pointOfSale));
+                .filtered('pointOfSale._id == $0', pointOfSale);
             return realm.delete(tables);
         });
     } catch (error) {

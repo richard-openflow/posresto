@@ -7,7 +7,7 @@ import { Alert, Dimensions, ScrollView, StyleSheet, View } from 'react-native';
 import Draggable from 'react-native-draggable';
 import { COLORS } from '../assets/styles/styleGuide';
 import { convertToTimeZoneManual } from '../utils/lib/convertToTimezoneGlobal';
-import { useQuery } from '../utils/realmDB/store';
+import { useSQLQuery } from '../../utils/sqliteDB';
 import { PureTwoPerson } from '../utils/tables';
 import ZoneSelector from './zoneSelector';
 import { hideModalActionTableMap, showModalActionTableMap } from '../redux/actions/ModalReducer';
@@ -38,7 +38,7 @@ const TableMap = ({
   const [selectedZone, setselectedZone] = useState(null);
   const [showingNext, SethowingNext] = useState(true);
 
-  const unitsAll = useQuery('Unit');
+  const unitsAll = useSQLQuery('Unit');
 
 
   const units = pointOfSale?._id

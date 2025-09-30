@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import moment from "moment"
 import DeviceInfo from "react-native-device-info"
-import { BSON } from "realm"
+import { generateId } from "./sqliteDB"
 
 const ValidateIPaddress = (ipaddress) => {
     if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress)) {
@@ -389,7 +389,7 @@ const totalOfOrder = async (order) => {
     }, 0)
 }
 
-const getOrderObject = async ({ saved = false, commandProduct = [], type = "collect", unit = null, user, pointOfSale, numberPeople = 1, origin = 'pos', nextInKitchen = 0, orderNumber = moment().valueOf(), _id = new BSON.ObjectId(), }) => {
+const getOrderObject = async ({ saved = false, commandProduct = [], type = "collect", unit = null, user, pointOfSale, numberPeople = 1, origin = 'pos', nextInKitchen = 0, orderNumber = moment().valueOf(), _id = generateId(), }) => {
     const rltm = await AsyncStorage.getItem('realTimeOrder')
     const a = {
         commandProduct,

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Dimensions, SectionList, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
-// import { useQuery } from '../utils/realmDB/store';
+// import { useSQLQuery } from '../../utils/sqliteDB';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import 'moment/locale/fr';
@@ -194,7 +194,7 @@ const SelectedProducts = ({ setShowTransfer, indexes, setIndexes, setShowPrinter
                             onPress={() => {
                                 dispatch(payOrder({
                                     orderNumber,
-                                    _id: new Realm.BSON.ObjectID(),
+                                    _id: generateId(),
                                     payType: "offert",
                                     amount: selectedProduct?.product?.price,
                                     roomNumber: "",

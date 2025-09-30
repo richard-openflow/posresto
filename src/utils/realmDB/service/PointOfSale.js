@@ -14,8 +14,8 @@ pointOfSaleController.create = async (data) => {
         pointOfSales = pointOfSales?.map(d => {
             let temp = d
             temp.ice = d.company.ice
-            temp._id = new Realm.BSON.ObjectID(temp?._id)
-            if (temp?.logo) temp.logo._id = new Realm.BSON.ObjectID(temp?.logo?._id)
+            temp._id = temp?._id
+            if (temp?.logo) temp.logo._id = temp?.logo?._id
             return temp
         })
 

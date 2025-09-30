@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { CommandController } from '../utils/realmDB/service/commandService'
 import { createOrder } from '../redux/actions/orderActions'
 import moment from 'moment'
-import { BSON } from 'realm'
+import { generateId } from "../../../utils/sqliteDB"
 import { getOrderObject } from '../utils/helpers'
 const ModalKeyPadSelector = ({ setOrderNumber, orders, activeStuff, table }) => {
     const { showKeyPad } = useSelector(state => state.Modal)
@@ -69,7 +69,7 @@ const ModalKeyPadSelector = ({ setOrderNumber, orders, activeStuff, table }) => 
                                                             pointOfSale: currentRestaurant,
                                                             user: activeStuff,
                                                             nextInKitchen: 0,
-                                                            _id: new BSON.ObjectId(),
+                                                            _id: generateId(),
                                                             "type": "onsite",
                                                             unit: unit
                                                         })

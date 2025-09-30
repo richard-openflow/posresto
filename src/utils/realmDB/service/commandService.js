@@ -1,6 +1,6 @@
 
 
-import Realm, { BSON } from 'realm';
+import { generateId } from "../../../utils/sqliteDB"
 import { realmConfig } from '../store';
 import moment from 'moment';
 import { sendToEveryOne } from '../../Udp/services';
@@ -21,15 +21,15 @@ function changeAllIds(obj) {
         let updated = { ...obj };
         for (const key in obj) {
             if (key === '_id' || key == "cancelled") {
-                updated[key] = new Realm.BSON.ObjectID(obj[key])
+                updated[key] = obj[key]
             } else if (key == "condition" || key == 'removableIngredient' || key == "addableIngredient" || key == "linkToFormula") {
                 if (obj[key]) {
                     if (key != 'linkToFormula')
-                        updated['_id'] = new Realm.BSON.ObjectID(obj[key])
-                    updated[key] = new Realm.BSON.ObjectID(obj[key])
+                        updated['_id'] = obj[key]
+                    updated[key] = obj[key]
                 }
-            } else if (key == "options" && updated[key].every(a => BSON.ObjectId.isValid(a))) {
-                updated[key] = updated[key].map((a) => new Realm.BSON.ObjectID(a))
+            } else if (key == "options" && updated[key].every(a => typeof(a))) {
+                updated[key] = updated[key].map((a) => a)
             } else if (Array.isArray(updated[key]) || (typeof updated[key] === 'object' && updated[key] !== null)) {
                 updated[key] = changeAllIds(updated[key])
             }
@@ -49,8 +49,8 @@ CommandController.create = async (orders) => {
 
                 let order = JSON.parse(JSON.stringify(data))
 
-                if (!order?._id) order._id = new Realm.BSON.ObjectID()
-                else order._id = new Realm.BSON.ObjectID(order?._id)
+                if (!order?._id) order._id = generateId()
+                else order._id = order?._id
 
                 if (!order?.orderNumber) order.orderNumber = moment().valueOf() + ''
                 else order.orderNumber = order.orderNumber + ''
@@ -61,7 +61,7 @@ CommandController.create = async (orders) => {
 
                 const pos = realm.objects('PointOfSale').filtered('_id == $0', new BSON.ObjectId(data?.pointOfSale?._id))[0]
 
-                const user = realm.objects('User').filtered('_id = $0', new Realm.BSON.ObjectID(data?.user?._id))[0]
+                const user = realm.objects('User').filtered('_id = $0', data?.user?._id)[0]
 
                 order.pointOfSale = pos
                 order.user = user
@@ -124,7 +124,7 @@ CommandController.updateCommandStatus = async (ids, useTCP = true, currentRestau
 
 CommandController.updateCommandKitchen = async (id, type = 'sent', value, currentRestaurant, useTCP = true) => {
 
-    const _id = new Realm.BSON.ObjectID(id)
+    const _id = id
     const realm = await Realm.open(realmConfig);
     const o = realm.write(() => {
         const cc = realm.objects('CommandProduct').filtered('_id == $0', _id)[0];
@@ -142,7 +142,7 @@ CommandController.updateCommandKitchen = async (id, type = 'sent', value, curren
 }
 
 CommandController.cancelCommnadItem = async (id, useTCP = true) => {
-    const _id = new Realm.BSON.ObjectID(id)
+    const _id = id
     const realm = await Realm.open(realmConfig);
     const o = realm.write(() => {
         const cc = realm.objects('CommandProduct').filtered('_id == $0', _id)[0];
@@ -155,12 +155,12 @@ CommandController.cancelCommnadItem = async (id, useTCP = true) => {
 }
 
 CommandController.payCommand = async (id, payType, amount, useTCP = true, roomNumber, firstName, lastName, phone, email, products, currentRestaurant, offertBy = "") => {
-    const _id = new Realm.BSON.ObjectID(id)
+    const _id = id
     const realm = await Realm.open(realmConfig);
     const o = realm.write(() => {
         let cc = realm.objects('Orders').filtered('_id == $0', _id)[0];
         let pay = realm.create('PayHistory', {
-            _id: new Realm.BSON.ObjectID(),
+            _id: generateId(),
             payType,
             amount,
             roomNumber,
@@ -216,7 +216,7 @@ CommandController.noteACommand = async (orderNumber, note, useTCP = true) => {
 
 CommandController.sentAllCommandToKitchen = async (id, useTCP = true, callback = () => { }) => {
 
-    const _id = new Realm.BSON.ObjectID(id)
+    const _id = id
     const realm = await Realm.open(realmConfig);
     const o = realm.write(() => {
         let cc = realm.objects('Orders').filtered('_id == $0', _id)[0];
@@ -296,7 +296,7 @@ CommandController.findUnsentCommand = async () => {
 }
 
 CommandController.hasBeenSynced = async (id,) => {
-    const _id = new Realm.BSON.ObjectID(id)
+    const _id = id
     const realm = await Realm.open(realmConfig);
     const o = realm.write(() => {
         let cc = realm.objects('Orders').filtered('_id == $0', _id)[0];
@@ -355,8 +355,8 @@ CommandController.getUnPaidCommmand = async ({ orders, dt, unitId }) => {
 
 CommandController.changeUnitOfCommand = async (orders = [], id, new_unit, callback = () => { }) => {
     try {
-        const _id = new Realm.BSON.ObjectID(id)
-        const u_id = new Realm.BSON.ObjectID(new_unit?._id)
+        const _id = id
+        const u_id = new_unit?._id
         const realm = await Realm.open(realmConfig);
         const o = realm.write(() => {
 
@@ -398,7 +398,7 @@ CommandController.setDateZToCommand = async ({ orders = [], pointOfSale, esp, ch
         } finally {
             tinyEmitter.emit('clear-order-number')
             realm.write(async () => {
-                realm.delete(realm.objects('Orders').filtered('pointOfSale._id == $0', new Realm.BSON.ObjectID(pointOfSale?._id)))
+                realm.delete(realm.objects('Orders').filtered('pointOfSale._id == $0', pointOfSale?._id))
             })
 
             callback()
@@ -414,8 +414,8 @@ CommandController.transferCommand = async ({ pointOfSale, sender, receiver }) =>
     try {
         const realm = await Realm.open(realmConfig);
         realm.write(async () => {
-            const orderSender = realm.objects('Orders').filtered('Z == null && user._id == $0 && pointOfSale._id == $1', new Realm.BSON.ObjectID(sender), new Realm.BSON.ObjectID(pointOfSale))
-            const receiverUser = realm.objects('User').filtered('_id == $0', new Realm.BSON.ObjectID(receiver))[0]
+            const orderSender = realm.objects('Orders').filtered('Z == null && user._id == $0 && pointOfSale._id == $1', sender, pointOfSale)
+            const receiverUser = realm.objects('User').filtered('_id == $0', receiver)[0]
 
 
             if (receiverUser)
@@ -432,7 +432,7 @@ CommandController.deleteOrders = async (ord, pointOfSale) => {
     try {
         const realm = await Realm.open(realmConfig);
         realm.write(async () => {
-            const orderSender = realm.objects('Orders').filtered('pointOfSale._id == $0', new Realm.BSON.ObjectID(pointOfSale))
+            const orderSender = realm.objects('Orders').filtered('pointOfSale._id == $0', pointOfSale)
 
             let db = orderSender
 
@@ -444,7 +444,7 @@ CommandController.deleteOrders = async (ord, pointOfSale) => {
             }, []);
 
             difference.map((e) => {
-                const a = realm.objects('Orders').filtered(' _id == $0', new Realm.BSON.ObjectID(e))
+                const a = realm.objects('Orders').filtered(' _id == $0', e)
                 realm.delete(a)
             })
         })

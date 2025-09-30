@@ -6,7 +6,7 @@ import Commande from '../screens/commande';
 import Historique from '../screens/Historique';
 import { colors } from '../theme/Styles';
 import { ModalStuffPinPadSelector } from './ModalStuffPinPadSelector';
-import { useQuery } from '../utils/realmDB/store';
+import { useSQLQuery } from '../../utils/sqliteDB';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllBookingOfDay } from '../redux/actions/orderActions';
 
@@ -22,7 +22,7 @@ export default function TabViewExample() {
   const { currentRestaurant } = useSelector(state => state.user)
 
 
-  //const staff = useQuery('User')?.filtered('pointOfSale._id == $0', new Realm.BSON.ObjectID(currentRestaurant))
+  //const staff = useSQLQuery('User')?.filtered('pointOfSale._id == $0', currentRestaurant)
   const dispatch = useDispatch()
   const { currentRestaurant: pointOfSale } = useSelector(state => state.user)
   const { stuff, activeStuff } = useSelector(state => state.stuff)

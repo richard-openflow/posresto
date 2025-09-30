@@ -355,9 +355,9 @@ const RenderItem = ({ isMaster, item, onPress, setOrderNum, pointOfSale, uniqueI
 
                         ...it,
                         orderNumber: item.orderNumber,
-                        _id: new Realm.BSON.ObjectID(),
+                        _id: generateId(),
                         amount: -it?.amount,
-                        cancelled: new Realm.BSON.ObjectID(it?._id),
+                        cancelled: it?._id,
                       },
                       show: true
                     })

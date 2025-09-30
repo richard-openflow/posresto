@@ -16,19 +16,19 @@ import { confirmaccessByToken, defineMasteringType, isLinkedToOrder, setCurrentR
 import { getZoneSuccess } from '../redux/actions/zoneAction'
 import { colors } from '../theme/Styles'
 import { getUniqueId } from '../utils/helpers'
-import { useQuery } from '../utils/realmDB/store'
+import { useSQLQuery } from '../../utils/sqliteDB'
 
 const LandingScreen = () => {
-    const pp = useQuery('PointOfSale')
-    const user = useQuery('User')
-    const printer = useQuery('Printer')
-    const stuff = useQuery('User')
-    const menu = useQuery('Menu')
-    const zone = useQuery('Zone')
-    const table = useQuery('Unit')
-    const productionTypes = useQuery('ProductionTypes')
-    const orders = useQuery('Orders')//.filtered('pointOfSale._id == $0', new Realm.BSON.ObjectID(currentRestaurant))
-    const cashBox = useQuery('BoxInformation')
+    const pp = useSQLQuery('PointOfSale')
+    const user = useSQLQuery('User')
+    const printer = useSQLQuery('Printer')
+    const stuff = useSQLQuery('User')
+    const menu = useSQLQuery('Menu')
+    const zone = useSQLQuery('Zone')
+    const table = useSQLQuery('Unit')
+    const productionTypes = useSQLQuery('ProductionTypes')
+    const orders = useSQLQuery('Orders')//.filtered('pointOfSale._id == $0', currentRestaurant)
+    const cashBox = useSQLQuery('BoxInformation')
     const storage = new MMKV({ id: 'pointOfSale' })
     const dispatch = useDispatch()
     const { currentRestaurant } = useSelector(state => state.user)
@@ -86,14 +86,14 @@ const LandingScreen = () => {
                                 accessibilityLabel={`see-restaurant-button-${index}`}
                                 testID={`see-restaurant-button-${index}`}
                                 underlayColor onPress={async () => {
-                                    dispatch(getPrinterSuccess(JSON.parse(JSON.stringify(printer?.filtered('pointOfSale._id == $0', new Realm.BSON.ObjectID(item?._id))))))
-                                    dispatch(setEmployeeStuffSuccess(JSON.parse(JSON.stringify(stuff?.filtered('pointOfSale._id == $0', new Realm.BSON.ObjectID(item?._id))))))
-                                    dispatch(getMenuSuccess(JSON.parse(JSON.stringify(menu?.filtered('pointOfSale._id == $0', new Realm.BSON.ObjectID(item?._id))))))
-                                    dispatch(getZoneSuccess(JSON.parse(JSON.stringify(zone?.filtered('pointOfSale._id == $0', new Realm.BSON.ObjectID(item?._id))))))
-                                    dispatch(getTableSuccess(JSON.parse(JSON.stringify(table?.filtered('pointOfSale._id == $0', new Realm.BSON.ObjectID(item?._id))))))
-                                    dispatch(getProductionTypesSuccess(JSON.parse(JSON.stringify(productionTypes?.filtered('pointOfSale._id == $0', new Realm.BSON.ObjectID(item?._id))))))
-                                    dispatch(getBoxInformationSuccess(JSON.parse(JSON.stringify(cashBox?.filtered('pointOfSale._id == $0', new Realm.BSON.ObjectID(item?._id))))))
-                                    dispatch(getOrderSuccess(JSON.parse(JSON.stringify(orders.filtered('pointOfSale._id == $0', new Realm.BSON.ObjectID(item?._id))))))
+                                    dispatch(getPrinterSuccess(JSON.parse(JSON.stringify(printer?.filtered('pointOfSale._id == $0', item?._id)))))
+                                    dispatch(setEmployeeStuffSuccess(JSON.parse(JSON.stringify(stuff?.filtered('pointOfSale._id == $0', item?._id)))))
+                                    dispatch(getMenuSuccess(JSON.parse(JSON.stringify(menu?.filtered('pointOfSale._id == $0', item?._id)))))
+                                    dispatch(getZoneSuccess(JSON.parse(JSON.stringify(zone?.filtered('pointOfSale._id == $0', item?._id)))))
+                                    dispatch(getTableSuccess(JSON.parse(JSON.stringify(table?.filtered('pointOfSale._id == $0', item?._id)))))
+                                    dispatch(getProductionTypesSuccess(JSON.parse(JSON.stringify(productionTypes?.filtered('pointOfSale._id == $0', item?._id)))))
+                                    dispatch(getBoxInformationSuccess(JSON.parse(JSON.stringify(cashBox?.filtered('pointOfSale._id == $0', item?._id)))))
+                                    dispatch(getOrderSuccess(JSON.parse(JSON.stringify(orders.filtered('pointOfSale._id == $0', item?._id)))))
                                     dispatch(setUniqueIdOfDevice(await getUniqueId()))
                                     dispatch(setUserRole(await AsyncStorage.getItem('ROLE')))
                                     dispatch(defineMasteringType((await AsyncStorage.getItem('MasterDevices')) == 'true'))

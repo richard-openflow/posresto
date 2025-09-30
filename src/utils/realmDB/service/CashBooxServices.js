@@ -1,4 +1,4 @@
-import Realm, { BSON } from 'realm';
+import { generateId } from "../../../utils/sqliteDB"
 
 import { realmConfig } from '../store';
 
@@ -9,7 +9,7 @@ CashBoxServices.create = async (data) => {
 
     try {
         let { dateOfZ, pointOfSale, esp, check, CB, bank, credit, room } = data
-        let _id = new Realm.BSON.ObjectID()
+        let _id = generateId()
         const realm = await Realm.open(realmConfig);
         return realm.write(() => {
             const apointOfSale = realm.objects('PointOfSale').filtered('_id == $0', new BSON.ObjectId(pointOfSale?._id))[0]

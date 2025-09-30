@@ -45,9 +45,9 @@ const ModalPayCommand = ({ }) => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [PaidProduct, setPaidProduct] = useState([]);
   const { showPayTypeModal, orderNumber } = useSelector(state => state.Modal);
-  //const Orders = useQuery('Orders');
+  //const Orders = useSQLQuery('Orders');
   const { orders } = useSelector(state => state.order)
-  //const staff = useQuery('User')?.filtered('pointOfSale._id == $0', new Realm.BSON.ObjectID(currentRestaurant))
+  //const staff = useSQLQuery('User')?.filtered('pointOfSale._id == $0', currentRestaurant)
   const { stuff, activeStuff } = useSelector(state => state.stuff)
   // const activeStaff = staff?.filtered('active = true')[0] 
   const user = activeStuff
@@ -126,9 +126,9 @@ const ModalPayCommand = ({ }) => {
   const { currentRestaurant: pointOfSale } = useSelector(state => state.user)
   // const currentRestaurant = new Realm.BSON.ObjectId(a)
 
-  //const pointOfSale = useQuery('PointOfSale').filtered('_id == $0', new Realm.BSON.ObjectID(currentRestaurant))
+  //const pointOfSale = useSQLQuery('PointOfSale').filtered('_id == $0', currentRestaurant)
 
-  //const printer = useQuery('Printer')?.filtered('pointOfSale._id == $0 && enbaled == true', new Realm.BSON.ObjectID(currentRestaurant))
+  //const printer = useSQLQuery('Printer')?.filtered('pointOfSale._id == $0 && enbaled == true', currentRestaurant)
   const { printer } = useSelector(state => state.printer)
   return (
     <Modal statusBarTranslucent transparent visible={showPayTypeModal}>
@@ -835,7 +835,7 @@ const ModalPayCommand = ({ }) => {
                         }
                         dispatch(payOrder({
                           orderNumber,
-                          _id: new Realm.BSON.ObjectID(),
+                          _id: generateId(),
                           payType: PayType,
                           amount: parseFloat(roomNumber),
                           roomNumber,
@@ -1054,7 +1054,7 @@ const ModalPayCommand = ({ }) => {
 
                         dispatch(payOrder({
                           orderNumber,
-                          _id: new Realm.BSON.ObjectID(),
+                          _id: generateId(),
                           payType: PayType,
                           amount,
                           roomNumber,
@@ -1169,7 +1169,7 @@ const ModalPayCommand = ({ }) => {
                         });
                         dispatch(payOrder({
                           orderNumber,
-                          _id: new Realm.BSON.ObjectID(),
+                          _id: generateId(),
                           payType: PayType,
                           amount,
                           roomNumber,

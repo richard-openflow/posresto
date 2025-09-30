@@ -14,11 +14,11 @@ menuController.create = async (data, pointOfSale) => {
             const pos = realm.objects('PointOfSale').filtered('_id == $0', pointOfSale)[0]
             let menu = data
 
-            menu._id = new Realm.BSON.ObjectID(menu?._id)
+            menu._id = menu?._id
             menu.CategoryMenu = menu?.CategoryMenu?.map(d => {
                 let temp = d
 
-                temp._id = new Realm.BSON.ObjectID(temp?._id)
+                temp._id = temp?._id
 
                 temp?.products?.map((p) => {
                     let a = p
@@ -26,20 +26,20 @@ menuController.create = async (data, pointOfSale) => {
                     a.product.option = []
 
                     if (p.conditions?.length > 0) {
-                        a.product.option = [...a.product.option, ...p.conditions.map(e => { return { ...e, type: 'conditions', _id: new Realm.BSON.ObjectID(e?._id), conditionOptions: e?.options } })]
+                        a.product.option = [...a.product.option, ...p.conditions.map(e => { return { ...e, type: 'conditions', _id: e?._id, conditionOptions: e?.options } })]
                     }
 
                     if (p.addableIngredients?.length > 0) {
                         a.product.option = [...a.product.option, ...p.addableIngredients.map(e => {
                             return {
-                                ...e, type: 'addableIngredients', _id: new Realm.BSON.ObjectID(e?._id), ingredientsOptions: e?.options.map((ea) => { return { ...ea.ingredient, addablePrice: ea.price, _id: new Realm.BSON.ObjectID(ea.ingredient?._id) } })
+                                ...e, type: 'addableIngredients', _id: e?._id, ingredientsOptions: e?.options.map((ea) => { return { ...ea.ingredient, addablePrice: ea.price, _id: ea.ingredient?._id } })
                             }
                         })]
                     }
 
                     if (p.removableIngredients?.length > 0) {
                         a.product.option = [...a.product.option, ...p.removableIngredients.map(e => {
-                            return { ...e, type: 'removableIngredients', _id: new Realm.BSON.ObjectID(e?._id), ingredientsOptions: e?.options.map((ea) => { return { ...ea, _id: new Realm.BSON.ObjectID(ea?._id) } }) }
+                            return { ...e, type: 'removableIngredients', _id: e?._id, ingredientsOptions: e?.options.map((ea) => { return { ...ea, _id: ea?._id } }) }
                         })]
                     }
 
@@ -49,22 +49,22 @@ menuController.create = async (data, pointOfSale) => {
 
                             return {
                                 ...e, type: 'addableProducts',
-                                _id: new Realm.BSON.ObjectID(e?._id),
+                                _id: e?._id,
                                 productOptions: e?.options.map((ea) => {
                                     if (!ea.product) return false
-                                    let product = realm.objects('CategoryItems').filtered('_id == $0', new Realm.BSON.ObjectID(ea?.product?._id))[0]
+                                    let product = realm.objects('CategoryItems').filtered('_id == $0', ea?.product?._id)[0]
                                     if (!product) {
                                         product = {
                                             ...ea?.product,
-                                            _id: new Realm.BSON.ObjectID(ea?.product?._id),
+                                            _id: ea?.product?._id,
                                             productionTypes: []
 
                                         }
-                                        if (product?.image) product.image._id = new Realm.BSON.ObjectID(product?.image?._id)
+                                        if (product?.image) product.image._id = product?.image?._id
                                     }
                                     const po = {
                                         addablePrice: ea.price,
-                                        _id: new Realm.BSON.ObjectID(ea?._id),
+                                        _id: ea?._id,
                                         product
 
                                     }
@@ -74,9 +74,9 @@ menuController.create = async (data, pointOfSale) => {
                             }
                         })]
                     }
-                    a._id = new Realm.BSON.ObjectID(a?._id)
-                    a.product._id = new Realm.BSON.ObjectID(a?.product?._id)
-                    if (a?.product?.image) a.product.image._id = new Realm.BSON.ObjectID(a?.product?.image?._id)
+                    a._id = a?._id
+                    a.product._id = a?.product?._id
+                    if (a?.product?.image) a.product.image._id = a?.product?.image?._id
                     return a
                 })
 

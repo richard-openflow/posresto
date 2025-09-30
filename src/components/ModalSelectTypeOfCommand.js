@@ -13,7 +13,7 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useSelector } from 'react-redux';
-import { BSON } from 'realm';
+import { generateId } from "../../../utils/sqliteDB"
 import { colors } from '../theme/Styles';
 import { CommandController } from '../utils/realmDB/service/commandService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -86,7 +86,7 @@ const ModalSelectTypeOfCommand = ({
           pointOfSale,
           user: activeStuff,
           zone: zones[0],
-          _id: new BSON.ObjectId(),
+          _id: generateId(),
 
           origin: 'pos',
           commandProduct: products?.map((e) => {
@@ -233,7 +233,7 @@ const ModalSelectTypeOfCommand = ({
                           unid: products[0]?.product?.unid,
                         }
                       }),
-                      _id: new BSON.ObjectId()
+                      _id: generateId()
                     };
                   });
                 }}
@@ -292,7 +292,7 @@ const ModalSelectTypeOfCommand = ({
                           unid: products[0]?.product?.unid,
                         }
                       }),
-                      _id: new BSON.ObjectId()
+                      _id: generateId()
 
                     };
                   })
@@ -359,7 +359,7 @@ const ModalSelectTypeOfCommand = ({
                           unid: products[0]?.product?.unid,
                         }
                       }),
-                      _id: new BSON.ObjectId()
+                      _id: generateId()
                     };
                   })
                 }

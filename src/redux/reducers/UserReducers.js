@@ -1,7 +1,7 @@
 
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import pointOfSaleController from '../../utils/realmDB/service/PointOfSale'
-import { UserController } from '../../utils/realmDB/service/UserService'
+import pointOfSaleController from '../../utils/sqliteDB/services/PointOfSale'
+import { UserController } from '../../utils/sqliteDB'
 import {
     ASKFORACCESS,
     ASKFORACCESSBYTOKEN,

@@ -1,4 +1,4 @@
-import { BSON } from "realm";
+import { generateId } from "../../../utils/sqliteDB"
 import {
   ADD_CONTACT_TO_ORDER,
   ADD_NOTE_TO_ORDER,
@@ -290,7 +290,7 @@ export default OrderReducer = (state = initialState, action) => {
 
     case TRANSFER_ORDERS:
 
-      const orderSender = state?.orders.filter((e) => e?.user?._id == new Realm.BSON.ObjectID(action?.payload?.sender?._id) && e?.pointOfSale?._id == new Realm.BSON.ObjectID(action?.payload?.pointOfSale?._id))
+      const orderSender = state?.orders.filter((e) => e?.user?._id == action?.payload?.sender?._id && e?.pointOfSale?._id == action?.payload?.pointOfSale?._id)
       orderSender.map((e) => {
         e.user = action?.payload?.receiver
       })

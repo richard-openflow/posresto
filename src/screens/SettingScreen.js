@@ -13,7 +13,7 @@ import { defineMasteringType, isLinkedToOrder, setUserRole } from '../redux/acti
 import { getUniqueId } from '../utils/helpers'
 import { PrinterServices } from '../utils/realmDB/service/PrinterService'
 import { SendMessage } from '../utils/Udp/services'
-import { useQuery } from '../utils/realmDB/store'
+import { useSQLQuery } from '../../utils/sqliteDB'
 import BackgroundService from 'react-native-background-actions';
 import { VeryIntensiveTask } from '../utils/background/Worker'
 let idbv = null
@@ -32,7 +32,7 @@ const options = {
 };
 
 const SettingScreen = () => {
-    const pp = useQuery('PointOfSale')
+    const pp = useSQLQuery('PointOfSale')
 
     const dispatch = useDispatch()
     const { currentRestaurant: a, role } = useSelector(state => state.user)

@@ -1,6 +1,6 @@
 import { API } from "@utils"
 import { all, call, fork, put, takeEvery } from 'redux-saga/effects'
-import { UserController } from '../../utils/realmDB/service/UserService'
+import { UserController } from '../../utils/sqliteDB'
 import { setEmployeeStuffFailed, setEmployeeStuffSuccess } from '../actions/StuffEmployeeAction'
 import { GET_EMPLOYEE_STUFF } from '../constants/StuffEmployeeActionTypes'
 

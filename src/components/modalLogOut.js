@@ -2,7 +2,7 @@ import { Realm } from '@realm/react';
 import React, { useState } from 'react';
 import { View, Text, Modal, TouchableOpacity } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { realmConfig } from '../utils/realmDB/store';
+import { realmConfig } from '../../utils/sqliteDB';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from 'react-redux';
 

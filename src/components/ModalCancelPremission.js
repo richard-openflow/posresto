@@ -4,13 +4,13 @@ import { TextInput } from "react-native-paper"
 import { useDispatch, useSelector } from "react-redux"
 import { colors } from "../theme/Styles"
 import { cancelProductInOrder, reSendAllToKitchen } from "../redux/actions/orderActions"
-//import { useQuery } from "../utils/realmDB/store"
+//import { useSQLQuery } from "../utils/realmDB/store"
 
 const ModalCancelPremission = () => {
 
 
 
-    // const users = useQuery('User').filtered('role == "ROLE_DIRECTOR" && pointOfSale._id == $0', new Realm.BSON.ObjectId(currentRestaurant))
+    // const users = useSQLQuery('User').filtered('role == "ROLE_DIRECTOR" && pointOfSale._id == $0', new Realm.BSON.ObjectId(currentRestaurant))
     const { stuff, activeStuff } = useSelector(state => state.stuff)
 
     const [info, setInfo] = useState({
