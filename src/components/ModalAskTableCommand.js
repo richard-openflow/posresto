@@ -41,10 +41,12 @@ const ModalAskTableCommand = ({ isLinked }) => {
                         {tempoBooking?._id && <View style={{ flexDirection: 'row', padding: 5, gap: 5, justifyContent: 'center', alignItems: 'center' }}>
                             <Text>{tempoBooking?.customer?.firstName}</Text>
                             <Text>{tempoBooking?.customer?.lastName}</Text>
+                        }
                         </View>}
                         {tempoBooking?._id && <View style={{ flexDirection: 'row', gap: 5, justifyContent: 'center', alignItems: 'center' }}>
                             <Text> Number of guests: </Text>
                             <Text>{tempoBooking?.nbrPeople}</Text>
+                        }
                         </View>}
                         {ords?.length != 0
                             &&
@@ -68,6 +70,7 @@ const ModalAskTableCommand = ({ isLinked }) => {
                                     <Feather name={'arrow-right'} />
                                 </View>
                             </TouchableHighlight>}
+                        }
                         <TouchableHighlight onPress={async () => {
                             if (isLinked && ords?.length == 0) {
                                 alert('You are in mode Connect, yo cannot open table')
@@ -135,6 +138,7 @@ const ModalAskTableCommand = ({ isLinked }) => {
                                     <Feather name={'arrow-right'} />
                                 </View>
                             </TouchableHighlight>}
+                        }
 
                     </View>
                 </View>

@@ -80,6 +80,7 @@ const SelectedProducts = ({ setShowTransfer, indexes, setIndexes, setShowPrinter
                                         <Text style={{ color: 'white', textAlign: 'right' }}>New service</Text>
                                     </View>
                                 </TouchableHighlight>}
+                            }
                             <View style={{ flexDirection: 'row' }}>
                                 {-section?.title?.slice(8) != parseInt(currentService) && <TouchableHighlight onPress={() => {
 
@@ -88,6 +89,7 @@ const SelectedProducts = ({ setShowTransfer, indexes, setIndexes, setShowPrinter
                                     <View style={{ backgroundColor: 'gray', padding: 3, }}>
                                         <Text style={{ color: 'white', textAlign: 'right' }}>Insert service</Text>
                                     </View>
+                                }
                                 </TouchableHighlight>}
                                 <TouchableHighlight style={{ flexGrow: 1 }} onPress={() => {
                                     nextSerivce(parseInt(section?.title?.slice(8)), true)
@@ -158,6 +160,7 @@ const SelectedProducts = ({ setShowTransfer, indexes, setIndexes, setShowPrinter
                                     }}>
                                     <Feather size={25} color={'white'} name={'x'} />
                                 </TouchableHighlight>}
+                            }
                             {(selectedProduct?.sent < selectedProduct?.orderClassifying) &&
 
                                 <TouchableHighlight
@@ -171,6 +174,7 @@ const SelectedProducts = ({ setShowTransfer, indexes, setIndexes, setShowPrinter
                                     }}>
                                     <Ionicons size={25} color={'white'} name={'trash-sharp'} />
                                 </TouchableHighlight>}
+                            }
                         </>
                         ,
 

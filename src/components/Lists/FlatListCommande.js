@@ -64,6 +64,7 @@ const RenderItem = ({ isMaster, item, onPress, setOrderNum, pointOfSale, uniqueI
         paddingHorizontal: 10,
         right: 0
       }}>{item?.user?.lastName} {item?.user?.firstName}</Text>}
+      }
       <Text style={{
         position: 'absolute',
         zIndex: 100,
@@ -92,6 +93,7 @@ const RenderItem = ({ isMaster, item, onPress, setOrderNum, pointOfSale, uniqueI
           <TouchableHighlight onPress={() => { onPress(item) }} style={{ justifyContent: 'center', alignItems: 'center', }}>
             <View style={{ justifyContent: 'center', alignItems: 'center', width: 90, flexDirection: "row", borderRightColor: '#00000045', borderRightWidth: 1, paddingHorizontal: 5 }}>
               {item?.type == 'onsite' && <Text style={[styles.itemText, { color: 'red', fontSize: 30 }]}>{`${item?.unit?.unitNumber}`}</Text>}
+              }
               {item?.type == 'collect' &&
                 <Fontisto color={'red'} name={'shopping-bag-1'} size={25} />
               }
@@ -131,6 +133,7 @@ const RenderItem = ({ isMaster, item, onPress, setOrderNum, pointOfSale, uniqueI
 
           <View style={{ justifyContent: 'flex-start', alignItems: 'center', width: 100, flexDirection: "row", borderRightColor: '#00000045', borderRightWidth: 1, paddingHorizontal: 5 }}>
             {item?.type == 'onsite' && <Text style={[styles.itemText, { paddingHorizontal: 5, width: 100, color: 'black' }]} ellipsizeMode='tail'>{zone?.find(a => a?.nameSlug == item?.unit?.localization)?.name}</Text>}
+            }
           </View>
 
           <View style={{ justifyContent: 'flex-start', alignItems: 'center', flexDirection: "row", paddingHorizontal: 5, gap: 12, height: 70, paddingLeft: 10, flexGrow: 1 }}>
@@ -376,14 +379,23 @@ const RenderItem = ({ isMaster, item, onPress, setOrderNum, pointOfSale, uniqueI
                     <Text style={{ marginLeft: 10, color: it?.payType == 'credit' ? "red" : it?.cancelled ? 'gray' : (it?.amount > 0 ? 'green' : 'red'), width: 50, textDecorationLine: it?.cancelled ? 'line-through' : 'none' }} numberOfLines={1} ellipsizeMode='tail'>{it?.amount}</Text>
 
                     {it?.payType == 'creditCard' && <Text style={{ textDecorationLine: it?.cancelled ? 'line-through' : 'none' }}> Paid By Credit card</Text>}
+                    }
                     {it?.payType == 'account' && <Text style={{ textDecorationLine: it?.cancelled ? 'line-through' : 'none' }}> Account</Text>}
+                    }
                     {it?.payType == 'cash' && <Text style={{ textDecorationLine: it?.cancelled ? 'line-through' : 'none' }}> Paid By Cash</Text>}
+                    }
                     {it?.payType == 'bank' && <Text style={{ textDecorationLine: it?.cancelled ? 'line-through' : 'none' }}> Paid  By Bank</Text>}
+                    }
                     {it?.payType == 'wire' && <Text style={{ textDecorationLine: it?.cancelled ? 'line-through' : 'none' }}> Paid By Wire</Text>}
+                    }
                     {it?.payType == 'room' && <Text style={{ textDecorationLine: it?.cancelled ? 'line-through' : 'none' }}> Room {it?.roomNumber} {it?.firstName}</Text>}
+                    }
                     {it?.payType == 'credit' && <Text style={{ textDecorationLine: it?.cancelled ? 'line-through' : 'none' }}> Credit To {it?.firstName} {it?.lastName}</Text>}
+                    }
                     {it?.payType == 'offert' && <Text style={{ textDecorationLine: it?.cancelled ? 'line-through' : 'none' }}> Offret By {it?.offertBy}</Text>}
+                    }
                     {it?.payType == 'remise' && <Text style={{ textDecorationLine: it?.cancelled ? 'line-through' : 'none' }}> Discount</Text>}
+                    }
                   </View>
 
 
@@ -397,7 +409,9 @@ const RenderItem = ({ isMaster, item, onPress, setOrderNum, pointOfSale, uniqueI
                 <Text style={{ marginLeft: 10, color: 'red', width: 50, }} numberOfLines={1} ellipsizeMode='tail'>{(item.payAmount - paidAccount) || 0}</Text>
                 <Text style={{}}> Remboursement </Text>
               </View>}
+            }
             {(item?.paidHistory?.length == 0 && !((item?.paymentRequired && ((item.payAmount - paidAccount) || 0) != 0))) && <Text> No Payment Yet</Text>}
+            }
           </View>
         </View>
       }

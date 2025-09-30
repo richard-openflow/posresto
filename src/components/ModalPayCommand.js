@@ -244,6 +244,7 @@ const ModalPayCommand = ({ }) => {
                       setAmount(parseFloat((totalToPay > (order?.payAmount - accountAmountPaid || 0) ? (order?.payAmount - accountAmountPaid || 0) : totalToPay) || 0))
 
                     }}
+                  }
                   >
                     <View
                       style={[
@@ -719,6 +720,7 @@ const ModalPayCommand = ({ }) => {
                         </View>
                       </TouchableHighlight>
                     </>}
+                  }
                 </View>
               </ScrollView>
 
@@ -868,6 +870,7 @@ const ModalPayCommand = ({ }) => {
                       </View>
                     </TouchableHighlight>
                   </View>}
+                }
                 {PayType == 'credit' && (
                   <TextInput
                     label={'Last Name'}
@@ -1291,6 +1294,7 @@ const ModalPayCommand = ({ }) => {
                       <Text style={{ color: 'white', fontSize: 20 }}>Close table</Text>
                     </View>
                   </TouchableHighlight>}
+                }
 
               </View>
             </ScrollView>

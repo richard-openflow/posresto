@@ -688,6 +688,7 @@ const RapportModalType = () => {
                     <ActivityIndicator size={25} />
                     <Text >Uploading data to Server</Text>
                 </View>}
+            }
         </Modal >
     )
 }
