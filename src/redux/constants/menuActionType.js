@@ -1,0 +1,4 @@
+export const GETMENU = "GETMENU";
+export const GETMENUSUCCESS = "GETMENUSUCCESS";
+export const GETMENUFAILED = "GETMENUFAILED";
+

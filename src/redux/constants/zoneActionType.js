@@ -1,0 +1,3 @@
+export const GETZONE = 'GETZONE'
+export const GETZONEFAILED = 'GETZONEFAILED'
+export const GETZONESUCCESS = 'GETZONESUCCESS'

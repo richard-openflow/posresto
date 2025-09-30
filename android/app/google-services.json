@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "460911065680",
+    "project_id": "posmanager-96d4c",
+    "storage_bucket": "posmanager-96d4c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:460911065680:android:b4064cc6b1f47ae8d12f55",
+        "android_client_info": {
+          "package_name": "com.pos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-O7tOuhcQCssK8cVCZjDrURsMJakNQkQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

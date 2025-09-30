@@ -1,0 +1,3 @@
+export const SENDCOMMAND = 'SENDCOMMAND';
+export const COMMANDSENT = 'COMMANDSENT';
+export const COMMANDFAILED = 'COMMANDFAILED';

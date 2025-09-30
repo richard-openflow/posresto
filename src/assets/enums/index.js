@@ -1,0 +1,58 @@
+const SCREENS = {
+  SPLASH :"#SPLASH",
+  LOGIN :"#LOGIN",
+  SETTING : "#SETTING",
+  MENU : "#MENU",
+  TABLE_VIEW : "#TABLE_VIEW"
+}
+
+const ASYNC_KEYS = {
+  ACCESS_TOKEN : '@ACCESS_TOKEN',
+  USER_ID : "@USER_ID",
+  USER_NAME : "@USER_NAME",
+  USER_DATA : "@USER_DATA",
+  TABLE_SIZE : "@TABLE_SIZE",
+}
+
+const ALERT_TYPES = {
+  SUCCESS : 'success',
+  WARNING : "warning",
+  DANGER : "danger",
+  INFO : "info"
+}
+const ALERT_HEADER = {
+  SUCCESS : 'SUCCESS!',
+  WARNING : "WARNING!",
+  DANGER : "ERROR!",
+  INFO : "INFO"
+}
+
+const LAYOUTS = {
+  PRIMARY : "PRIMARY",
+  SECONDARY : "SECONDARY"
+}
+
+const TOOLS ={
+  RESIZE : 'RESIZE',
+  COLOR : 'COLOR',
+  LINK : 'LINK',
+  TEXT : 'TEXT',
+  ADD_URL : 'ADD_URL',
+  CAMERA : 'CAMERA',
+}
+
+const BOOK_STATUS ={
+  OCCUPIED : "OCCUPIED",
+  BOOKED : "BOOKED",
+  EMPTY : "EMPTY"
+}
+
+export {
+  SCREENS,
+  ASYNC_KEYS,
+  ALERT_TYPES,
+  ALERT_HEADER,
+  LAYOUTS,
+  TOOLS,
+  BOOK_STATUS
+}
