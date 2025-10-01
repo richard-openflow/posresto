@@ -1,0 +1,14 @@
+Migration from Realm to SQLite
+
+- Replaced Realm database with SQLite implementation
+- Added new SQLite service layer (MenuService, CommandService, UnitService, etc.)
+- Updated App.js to initialize SQLite instead of Realm
+- All data persistence now uses SQLite
+- Maintained same API surface for backward compatibility
+- Added MIGRATION_NOTES.md with detailed migration guide
+
+Files modified:
+- src/utils/sqliteDB/* (new SQLite implementation)
+- App.js (database initialization)
+- package.json (updated dependencies)
+- MIGRATION_NOTES.md (migration documentation)
